@@ -1,0 +1,17 @@
+<h1>Wikis</h1>
+
+<p class="actions">
+  <%= link_to "Create new wiki", new_wiki_path %>
+</p>
+
+<table>
+  <% @wikis.each do |wiki| %>
+  <tr>
+    <td><%= link_to wiki.name, wiki %></td>
+    <td>
+      [<%= link_to "Edit", edit_wiki_path(wiki) %>]
+      | [<%= link_to "Del", wiki, method: :delete, confirm: "Really delete #{wiki.name}?"  %>]
+    </td>
+  </tr>
+  <% end %>
+</table>

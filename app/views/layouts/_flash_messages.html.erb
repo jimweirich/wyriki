@@ -1,0 +1,7 @@
+<% unless flash.empty? %>
+<% flash.each do |key, msg| %>
+<p class="flash flash_<%= key %>">
+  <%= msg %>
+</p>
+<% end %>
+<% end %>

@@ -1,0 +1,2 @@
+module WikisHelper
+end

@@ -1,0 +1,14 @@
+<%= form_for(@wiki) do |f| %>
+<p>
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</p>
+<p>
+  <%= f.label :home_page %><br />
+  <%= f.text_field :home_page %>
+</p>
+<p>
+  <%= f.submit %> |
+  <%= link_to "Cancel", wikis_path %>
+</p>
+<% end %>
