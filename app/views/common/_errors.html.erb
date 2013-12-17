@@ -1,0 +1,7 @@
+<% unless model.errors.empty? %>
+<ul>
+  <% model.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>

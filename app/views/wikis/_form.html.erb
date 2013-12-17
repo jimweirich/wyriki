@@ -1,4 +1,5 @@
 <%= form_for(@wiki) do |f| %>
+<%= render "common/errors", model: @wiki %>
 <p>
   <%= f.label :name %><br />
   <%= f.text_field :name %>
