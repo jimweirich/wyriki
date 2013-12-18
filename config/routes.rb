@@ -4,6 +4,8 @@ Wyriki::Application.routes.draw do
     resources :pages
   end
 
+  get ':wiki/:page' => 'pages#show_named', as: :named_page
+
   root "wikis#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

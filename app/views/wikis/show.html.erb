@@ -15,7 +15,7 @@
 <ul>
 <% @wiki.pages.each do |page| %>
 <li>
-  <%= link_to page.name, [@wiki, page] %>
+  <%= link_to page.name, named_page_link(page) %>
   [<%= link_to "Delete", [@wiki, page], method: :delete, confirm: "Do you REALLY want to delete #{page.name}?" %>]
 </li>
 <% end %>

@@ -5,6 +5,11 @@ class PagesController < ApplicationController
     @page = @wiki.pages.find(params[:id])
   end
 
+  def show_named
+    @page = Page.by_name(params[:wiki], params[:page])
+    render :show
+  end
+
   def new
     @wiki = Wiki.find(params[:wiki_id])
     @page = @wiki.pages.new
