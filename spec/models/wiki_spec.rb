@@ -39,7 +39,7 @@ describe Wiki do
     end
 
     context "with a home_page with no lowercase" do
-      Given(:attrs) { valid_attrs.merge(home_page: 'XXL') }
+      Given(:attrs) { valid_attrs.merge(home_page: 'SOS') }
       Then { must_be_invalid(wiki, :home_page, /is not a wiki name/) }
     end
 
