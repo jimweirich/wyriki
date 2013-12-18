@@ -1,4 +1,7 @@
 class Wiki < ActiveRecord::Base
+
+  has_many :pages, dependent: :destroy
+
   validates :name, presence: true
   validates :home_page,
     presence: true,

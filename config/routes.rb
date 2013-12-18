@@ -1,5 +1,8 @@
 Wyriki::Application.routes.draw do
-  resources :wikis
+
+  resources :wikis do
+    resources :pages
+  end
 
   root "wikis#index"
 

@@ -1,0 +1,7 @@
+<h1><%= link_to @wiki.name, @wiki %> / <%= @page.name %></h1>
+
+<p class="actions">
+  <%= link_to "Edit", edit_wiki_page_path(@wiki, @page) %>
+</p>
+
+<%= @page.content %>

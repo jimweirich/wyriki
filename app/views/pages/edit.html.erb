@@ -1,0 +1,12 @@
+<h1>Edit Page: <%= @page.name %></h1>
+
+<%= form_for([@wiki, @page]) do |f| %>
+<%= render "common/errors", model: @page %>
+<p>
+  <%= f.text_area :content, rows: 10, cols: 50 %>
+</p>
+<p>
+  <%= f.submit %> |
+  <%= link_to "Cancel", [@wiki, @page] %>
+</p>
+<% end %>

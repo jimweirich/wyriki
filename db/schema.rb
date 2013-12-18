@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217185830) do
+ActiveRecord::Schema.define(version: 20131218155626) do
+
+  create_table "pages", force: true do |t|
+    t.integer  "wiki_id"
+    t.string   "name"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pages", ["wiki_id", "name"], name: "index_pages_on_wiki_id_and_name", unique: true
+  add_index "pages", ["wiki_id"], name: "index_pages_on_wiki_id"
 
   create_table "wikis", force: true do |t|
     t.string   "name"

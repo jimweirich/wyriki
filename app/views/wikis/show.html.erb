@@ -5,3 +5,18 @@
 <p class="actions">
   <%= link_to "Back", wikis_path %>
 </p>
+
+<h2>Pages</h2>
+
+<p class="actions">
+  <%= link_to "Create page", new_wiki_page_path(@wiki) %>
+</p>
+
+<ul>
+<% @wiki.pages.each do |page| %>
+<li>
+  <%= link_to page.name, [@wiki, page] %>
+  [<%= link_to "Delete", [@wiki, page], method: :delete, confirm: "Do you REALLY want to delete #{page.name}?" %>]
+</li>
+<% end %>
+</ul>

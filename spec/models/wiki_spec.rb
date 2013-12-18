@@ -6,8 +6,6 @@ describe Wiki do
   Given(:wiki) { Wiki.new(attrs) }
 
   describe "validations" do
-    When(:valid) { wiki.valid? }
-
     context "with valid attributes" do
       Then { must_be_valid(wiki) }
     end
