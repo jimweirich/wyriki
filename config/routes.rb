@@ -8,6 +8,8 @@ Wyriki::Application.routes.draw do
     resources :pages
   end
 
+  resource :session
+
   get ':wiki/:page' => 'pages#show_named', as: :named_page
 
   root "wikis#index"

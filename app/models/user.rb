@@ -33,4 +33,9 @@ class User < ActiveRecord::Base
     permission_for(wiki).can_administrate?
   end
 
+  def self.authenticate(email, submitted_password)
+    user = User.find_by_email(email)
+    user && user.authenticate(submitted_password)
+  end
+
 end
