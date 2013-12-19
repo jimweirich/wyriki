@@ -9,11 +9,6 @@
   <tr>
     <td><%= link_to user.name, user %></td>
     <td><%= user.email %></td>
-    <td>
-      [ <%= link_to "Edit", edit_user_path(user) %>
-      | <%= link_to "Del", user, method: :delete, confirm: "Delete user #{user.name}?" %>
-      ]
-      </td>
   </tr>
   <% end %>
 </table>

@@ -6,4 +6,8 @@ class Wiki < ActiveRecord::Base
   validates :home_page,
     presence: true,
     format: { with: /\A([A-Z][a-z0-9]+){2,}\Z/, message: "is not a wiki name" }
+
+  def self.active_wikis
+    all.order("name")
+  end
 end

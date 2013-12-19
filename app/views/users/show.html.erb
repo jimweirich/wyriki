@@ -15,3 +15,23 @@
   <span>Email:</span>
   <span><%= @user.email %></span>
 </p>
+
+<h3>Wiki Permissions</h3>
+
+<table>
+  <% @wikis.each do |wiki| %>
+  <tr>
+    <td><%= wiki.name %></td>
+    <td>
+      <%= form_for(@user.permission_for(wiki)) do |f| %>
+      <p>
+        <%= f.select :role, ["reader", "writer", "admin"] %>
+        <%= f.hidden_field :wiki_id %>
+        <%= f.hidden_field :user_id %>
+        <%= f.submit "Update"%>
+      </p>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>

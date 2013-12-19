@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  has_many :permissions, dependent: :destroy
+
   has_secure_password
 
   validates :name, presence: true
@@ -9,6 +11,26 @@ class User < ActiveRecord::Base
 
   def self.all_users
     all.order("name")
+  end
+
+  def permission_for(wiki)
+    find_permission(wiki) || Permission.new(user: self, wiki: wiki, role: "reader")
+  end
+
+  def find_permission(wiki)
+    permissions.where("wiki_id = ?", wiki.id).first
+  end
+
+  def can_read?(wiki)
+    permission_for(wiki).can_read?
+  end
+
+  def can_write?(wiki)
+    permission_for(wiki).can_write?
+  end
+
+  def can_administrate?(wiki)
+    permission_for(wiki).can_administrate?
   end
 
 end

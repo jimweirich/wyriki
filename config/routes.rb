@@ -1,5 +1,7 @@
 Wyriki::Application.routes.draw do
 
+  resources :permissions
+
   resources :users
 
   resources :wikis do

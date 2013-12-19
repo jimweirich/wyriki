@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @wikis = Wiki.active_wikis
   end
 
   def new
