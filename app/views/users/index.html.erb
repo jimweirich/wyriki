@@ -1,14 +1,23 @@
-<h1>Users</h1>
+<div class="row separate">
+  <div class="columns large-8">
+    <h1>Users</h1>
+  </div>
+  <div class="columns medium-4">
+    <p class="actions">
+      <%= link_to "Add user", new_user_path, button_css %>
+    </p>
+  </div>
+</div>
 
-<p class="actions">
-  <%= link_to "Add user", new_user_path %>
-</p>
-
-<table>
-  <% @users.each do |user| %>
-  <tr>
+<% @users.each do |user| %>
+<div class="row">
+  <div class="columns large-2">
     <td><%= link_to user.name, user %></td>
+  </div>
+  <div class="columns large-2">
     <td><%= user.email %></td>
-  </tr>
-  <% end %>
-</table>
+  </div>
+  <div class="columns large-1">
+  </div>
+</div>
+<% end %>

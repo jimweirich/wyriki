@@ -1,12 +1,20 @@
-<h1>Edit Page: <%= @page.name %></h1>
+<div class="row">
+  <div class="columns large-8">
+    <h1>Edit Page: <%= @page.name %></h1>
+  </div>
+</div>
 
-<%= form_for([@wiki, @page]) do |f| %>
-<%= render "common/errors", model: @page %>
-<p>
-  <%= f.text_area :content, rows: 10, cols: 50 %>
-</p>
-<p>
-  <%= f.submit %> |
-  <%= link_to "Cancel", [@wiki, @page] %>
-</p>
-<% end %>
+<div class="row">
+  <div class="columns large-12">
+    <%= form_for([@wiki, @page]) do |f| %>
+    <%= render "common/errors", model: @page %>
+    <p>
+      <%= f.text_area :content, rows: 10, cols: 50 %>
+    </p>
+    <p>
+      <%= f.submit button_css %>
+      <%= link_to "Cancel", [@wiki, @page], button_css %>
+    </p>
+    <% end %>
+  </div>
+</div>

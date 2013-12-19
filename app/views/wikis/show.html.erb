@@ -1,22 +1,34 @@
-<h1>Wiki: <%= @wiki.name %></h1>
+<div class="row separate">
+  <div class="columns large-6">
+    <h1>Wiki: <%= @wiki.name %></h1>
+  </div>
+  <div class="columns large-6">
+    <p class="actions">
+      <%= link_to "Edit", edit_wiki_path(@wiki), button_css %>
+      <%= link_to "Delete", wiki_path(@wiki),
+          button_css.merge(method: :delete, confirm: "Really delete wiki #{@wiki.name}?") %>
+    </p>
+  </div>
+</div>
 
 <p>Home Page: <%= @wiki.home_page %></p>
 
-<p class="actions">
-  <%= link_to "Back", wikis_path %>
-</p>
+<div class="row">
+  <div class="columns large-8">
+    <h2>Pages</h2>
+  </div>
+  <div class="columns medium-4">
+    <p class="actions">
+      <%= link_to "Create page", new_wiki_page_path(@wiki), button_css %>
+    </p>
+  </div>
+</div>
 
-<h2>Pages</h2>
-
-<p class="actions">
-  <%= link_to "Create page", new_wiki_page_path(@wiki) %>
-</p>
 
 <ul>
-<% @wiki.pages.each do |page| %>
-<li>
-  <%= link_to page.name, named_page_link(page) %>
-  [<%= link_to "Delete", [@wiki, page], method: :delete, confirm: "Do you REALLY want to delete #{page.name}?" %>]
-</li>
-<% end %>
+  <% @wiki.pages.each do |page| %>
+  <li>
+    <%= link_to page.name, named_page_link(page) %>
+  </li>
+  <% end %>
 </ul>

@@ -1,3 +1,71 @@
 // Place all the styles related to the wikis controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$banner_bg: darken(#edfbff, 5%);
+
+.actions {
+    float: right;
+}
+.row .separate {
+    margin-top: 1em;
+}
+
+.header {
+    background: $banner_bg;
+}
+
+.sidebar {
+    padding: 0.5em 1em;
+    background: $banner_bg;
+}
+
+.flash {
+    color: white;
+    padding: 0.5em 1em;
+}
+.flash_notice {
+    background: lighten(green, 3%);
+}
+.flash_alert {
+    background: red;
+}
+
+/* ERRORS */
+
+$errors-background-color: #FFDCDC;
+$errors-outline-color: #AD0000;
+$errors-text-color: #DC3D3D;
+
+#errors {
+    margin: 1em 8px;
+    padding: 1em 2em;
+    background: $errors-background-color;
+    border: 3px solid $errors-outline-color;
+
+    h3 {
+        color: $errors-text-color;
+        font-size: 1.25em;
+        margin-bottom: 0.5em;
+    }
+
+    p {
+        margin: .5em 0;
+        font-weight: bold;
+    }
+
+    ul {
+        margin-top: 1em;
+        margin-left: 2em;
+    }
+}
+
+.field_with_errors {
+    input, textarea {
+        background: $errors-background-color;
+        border: 2px solid $errors-outline-color;
+    }
+    label {
+        color: $errors-text-color;
+    }
+}

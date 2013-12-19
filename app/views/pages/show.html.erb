@@ -1,7 +1,18 @@
-<h1><%= link_to @page.wiki.name, @page.wiki %> / <%= @page.name %></h1>
+<div class="row separate">
+  <div class="large-6 columns">
+    <h1><%= link_to @page.wiki.name, @page.wiki %> / <%= @page.name %></h1>
+  </div>
+  <div class="small-4 columns">
+    <p class="actions">
+      <%= link_to "Edit", edit_wiki_page_path(@page.wiki, @page), button_css %>
+      <%= link_to "Delete", wiki_page_path(@page.wiki, @page),
+          button_css.merge(method: :delete, confirm: "Do you really want to delete page #{@page.name}?") %>
+    </p>
+  </div>
+</div>
 
-<p class="actions">
-  <%= link_to "Edit", edit_wiki_page_path(@page.wiki, @page) %>
-</p>
-
-<%= @page.content %>
+<div class="row">
+  <div class="large-12 columns">
+    <%= @page.content %>
+  </div>
+</div>

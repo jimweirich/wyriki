@@ -1,17 +1,20 @@
-<h1>Wikis</h1>
+<div class="row separate">
+  <div class="columns large-8">
+    <h1>Wikis</h1>
+  </div>
+  <div class="columns medium-4">
+    <p class="actions">
+      <%= link_to "Create new wiki", new_wiki_path, button_css %>
+    </p>
+  </div>
+</div>
 
-<p class="actions">
-  <%= link_to "Create new wiki", new_wiki_path %>
-</p>
-
-<table>
-  <% @wikis.each do |wiki| %>
-  <tr>
-    <td><%= link_to wiki.name, wiki %></td>
-    <td>
-      [ <%= link_to "Edit", edit_wiki_path(wiki) %>
-      | <%= link_to "Del", wiki, method: :delete, confirm: "Really delete #{wiki.name}?"  %> ]
-    </td>
-  </tr>
-  <% end %>
-</table>
+<div class="row">
+  <div class="columns large-8">
+    <ul>
+      <% @wikis.each do |wiki| %>
+      <li><%= link_to wiki.name, wiki %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -11,7 +11,7 @@
   <%= f.text_area :content, rows: 10, cols: 50 %>
 </p>
 <p>
-  <%= f.submit %> |
-  <%= link_to "Cancel", @wiki %>
+  <%= f.submit button_css %>
+  <%= link_to "Cancel", @wiki, button_css %>
 </p>
 <% end %>

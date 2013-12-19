@@ -1,9 +1,15 @@
-<div>
-  <h1>WyRiki</h1>
-  <% if current_user %>
-  <%= current_user.name %>
-  (<%= link_to "sign out", session_path, method: :delete %>)
-  <% else %>
-  <%= link_to "Sign in", new_session_path %>
-  <% end %>
+<div class="row header">
+  <div class="large-8 columns">
+    <h1><%= link_to "WyRiki", wikis_path %></h1>
+  </div>
+  <div class="large-4 columns">
+    <p class="actions">
+      <% if current_user %>
+      <%= current_user.name %>
+      (<%= link_to "sign out", session_path, method: :delete %>)
+      <% else %>
+      <%= link_to "Sign in", new_session_path %>
+      <% end %>
+    </p>
+  </div>
 </div>

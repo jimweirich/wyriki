@@ -8,9 +8,22 @@
 </head>
 <body>
 
-<%= render "layouts/header" %>
-<%= render "layouts/flash_messages" %>
-<%= yield %>
+  <%= render "layouts/header" %>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <%= render "layouts/flash_messages" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-10 columns">
+      <%= yield %>
+    </div>
+    <div class="medium-2 columns">
+      <%= render "layouts/sidebar" %>
+    </div>
+  </div>
 
 </body>
 </html>

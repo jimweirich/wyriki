@@ -9,7 +9,7 @@
   <%= f.text_field :home_page %>
 </p>
 <p>
-  <%= f.submit %> |
-  <%= link_to "Cancel", wikis_path %>
+  <%= f.submit class: "small radius button" %>
+  <%= link_to "Cancel", @wiki, class: "small radius button" %>
 </p>
 <% end %>

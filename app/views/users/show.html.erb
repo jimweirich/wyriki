@@ -1,37 +1,60 @@
-<h1>User <%= @user.name %></h1>
+<div class="row separate">
+  <div class="columns large-8">
+    <h2>User <%= @user.name %></h2>
+  </div>
+  <div class="columns medium-4">
+    <p class="actions">
+      <%= link_to "Edit", edit_user_path(@user), button_css %>
+      <%= link_to "Delete", @user,
+          button_css.merge(method: :delete, confirm: "Really delete user #{@user.name}?") %>
+    </p>
+  </div>
+</div>
 
-<p class="actions">
-  [ <%= link_to "Back", users_path %>
-  | <%= link_to "Edit", edit_user_path(@user) %>
-  | <%= link_to "Delete", @user, method: :delete, confirm: "Really delete user #{@user.name}?" %>
-  ]
-</p>
+<div class="row">
+  <div class="columns large-12">
+    <div class="row">
+      <div class="columns small-1">
+        Name:
+      </div>
+      <div class="columns small-11">
+        <%= @user.name %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="columns small-1">
+        Email:
+      </div>
+      <div class="columns small-11">
+        <%= @user.email %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <span>Name:</span>
-  <span><%= @user.name %></span>
-</p>
-<p>
-  <span>Email:</span>
-  <span><%= @user.email %></span>
-</p>
 
-<h3>Wiki Permissions</h3>
+<div class="row separate">
+  <div class="columns large-8">
+    <h2>Wiki Permissions</h2>
+  </div>
+</div>
 
-<table>
-  <% @wikis.each do |wiki| %>
-  <tr>
-    <td><%= wiki.name %></td>
-    <td>
-      <%= form_for(@user.permission_for(wiki)) do |f| %>
-      <p>
-        <%= f.select :role, ["reader", "writer", "admin"] %>
-        <%= f.hidden_field :wiki_id %>
-        <%= f.hidden_field :user_id %>
-        <%= f.submit "Update"%>
-      </p>
-      <% end %>
-    </td>
-  </tr>
+<% @wikis.each do |wiki| %>
+<div class="row">
+  <div class="columns large-2">
+    <%= wiki.name %>
+  </div>
+  <%= form_for(@user.permission_for(wiki)) do |f| %>
+  <div class="columns large-2">
+    <%= f.select :role, ["reader", "writer", "admin"] %>
+    <%= f.hidden_field :wiki_id %>
+    <%= f.hidden_field :user_id %>
+  </div>
+  <div class="columns large-1">
+    <%= f.submit "Update"%>
+  </div>
+  <div class="columns large-1">
+  </div>
   <% end %>
-</table>
+</div>
+<% end %>

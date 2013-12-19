@@ -1,7 +1,11 @@
 <% unless flash.empty? %>
 <% flash.each do |key, msg| %>
-<p class="flash flash_<%= key %>">
-  <%= msg %>
-</p>
+<div class="row">
+  <div class="colums large-12">
+    <p class="flash flash_<%= key %>">
+      <%= msg %>
+    </p>
+  </div>
+</div>
 <% end %>
 <% end %>
