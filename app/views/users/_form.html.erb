@@ -1,0 +1,27 @@
+<%= form_for(@user) do |f| %>
+<%= render "common/errors", model: @user %>
+<p>
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</p>
+<p>
+  <%= f.label :email %><br />
+  <%= f.text_field :email %>
+</p>
+
+<% if @user.new_record? %>
+<p>
+  <%= f.label :password %><br />
+  <%= f.password_field :password %>
+</p>
+<p>
+  <%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %>
+</p>
+<% end %>
+
+<p>
+  <%= f.submit %> |
+  <%= link_to "Cancel", wikis_path %>
+</p>
+<% end %>

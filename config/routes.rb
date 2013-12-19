@@ -1,5 +1,7 @@
 Wyriki::Application.routes.draw do
 
+  resources :users
+
   resources :wikis do
     resources :pages
   end
