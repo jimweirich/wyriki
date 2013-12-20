@@ -10,6 +10,7 @@
   <%= password_field_tag :password %>
 </p>
 <p>
-  <%= submit_tag "Log in" %>
+  <%= submit_tag "Log in", button_css %>
+  … <%= link_to "or register", new_user_path %>
 </p>
 <% end %>

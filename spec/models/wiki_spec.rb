@@ -20,6 +20,12 @@ describe Wiki do
       Then { must_be_invalid(wiki, :name, /blank/) }
     end
 
+    context "with duplicate name" do
+      Given { Wiki.create!(valid_attrs) }
+      Given(:attrs) { valid_attrs }
+      Then { must_be_invalid(wiki, :name, /taken/) }
+    end
+
     context "with missing home_page" do
       Given(:attrs) { valid_attrs.merge(home_page: nil) }
       Then { must_be_invalid(wiki, :home_page, /blank/) }
