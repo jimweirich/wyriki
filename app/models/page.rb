@@ -9,7 +9,7 @@ class Page < ActiveRecord::Base
     Page.
       includes(:wiki).
       joins(:wiki).
-      where("wikis.name = ? and pages.name = ?", "Ruse", "HomePage").
+      where("wikis.name = ? and pages.name = ?", wiki_name, page_name).
       first
   end
 

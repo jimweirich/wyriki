@@ -4,6 +4,7 @@ module Attrs
   ATTRIBUTES = {
     user: { name: "Jon Dough", email: "jon@jon", password: "secret", password_confirmation: "secret" },
     wiki: { name: "Wiki", home_page: "HomePage" },
+    page: { name: "HomePage" }
   }
 
   def method_missing(sym, *args, &block)

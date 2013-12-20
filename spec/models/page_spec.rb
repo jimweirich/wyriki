@@ -20,6 +20,16 @@ describe Page do
       Given(:attrs) { valid_attrs.merge(name: "page") }
       Then { must_be_invalid(page, :name, /not a wiki name/) }
     end
+  end
 
+  describe ".by_name" do
+    Given!(:wiki) { Wiki.create!(Attrs.wiki) }
+    Given!(:page) { wiki.pages.create!(Attrs.page) }
+
+    Given!(:wiki2) { Wiki.create!(Attrs.wiki(name: "Other")) }
+    Given!(:page2) { wiki2.pages.create!(Attrs.page) }
+
+    When(:result) { Page.by_name(wiki.name, page.name) }
+    Then { result == page }
   end
 end
