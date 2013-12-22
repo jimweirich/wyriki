@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe Page do
-  Given(:valid_attrs) { { name: "SomePage", content: "CONTENT" } }
+  Given(:content) { "CONTENT" }
+  Given(:valid_attrs) { { name: "SomePage", content: content } }
   Given(:attrs) { valid_attrs }
   Given(:wiki) { Wiki.new(name: "Sample", home_page: "HomePage") }
   Given(:page) { wiki.pages.new(attrs) }
@@ -31,5 +32,19 @@ describe Page do
 
     When(:result) { Page.by_name(wiki.name, page.name) }
     Then { result == page }
+  end
+
+  describe "#html_content" do
+    describe "basic styling" do
+      Given(:content) { "Hello, World\n" }
+      Then { page.html_content == "<p>Hello, World</p>\n" }
+    end
+
+    describe "page linking" do
+      Given { page.stub(:wiki => wiki) }
+      Given(:content) { "This is a HomePage." }
+      Then { page.html_content =~ /<a[^>]+>HomePage<\/a>/ }
+      Then { page.html_content =~ /href="\/Sample\/HomePage"/ }
+    end
   end
 end
