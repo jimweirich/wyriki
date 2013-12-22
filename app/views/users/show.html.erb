@@ -6,7 +6,10 @@
     <p class="actions">
       <%= link_to "Edit", edit_user_path(@user), button_css %>
       <%= link_to "Delete", @user,
-          button_css.merge(method: :delete, confirm: "Really delete user #{@user.name}?") %>
+          button_css.merge(
+            method: :delete,
+            data: { confirm: "Really delete user #{@user.name}?" })
+          %>
     </p>
   </div>
 </div>

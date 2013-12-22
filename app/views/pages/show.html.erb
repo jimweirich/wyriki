@@ -6,7 +6,10 @@
     <p class="actions">
       <%= link_to "Edit", edit_wiki_page_path(@page.wiki, @page), button_css %>
       <%= link_to "Delete", wiki_page_path(@page.wiki, @page),
-          button_css.merge(method: :delete, confirm: "Do you really want to delete page #{@page.name}?") %>
+          button_css.merge(
+            method: :delete,
+            data: { confirm: "Do you really want to delete page #{@page.name}?" })
+          %>
     </p>
   </div>
 </div>
