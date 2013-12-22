@@ -7,7 +7,12 @@ class PagesController < ApplicationController
 
   def show_named
     @page = Page.by_name(params[:wiki], params[:page])
-    render :show
+    if @page
+      render :show
+    else
+      wiki = Wiki.find_by_name(params[:wiki])
+      redirect_to new_wiki_page_path(wiki)
+    end
   end
 
   def new
