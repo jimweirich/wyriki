@@ -10,4 +10,9 @@ class Wiki < ActiveRecord::Base
   def self.active_wikis
     all.order("name")
   end
+
+  def page?(page_name)
+    page = pages.where("name = ?", page_name).first
+    ! page.nil?
+  end
 end

@@ -11,13 +11,13 @@ class PagesController < ApplicationController
       render :show
     else
       wiki = Wiki.find_by_name(params[:wiki])
-      redirect_to new_wiki_page_path(wiki)
+      redirect_to new_wiki_page_path(wiki, "page[name]" => params[:page])
     end
   end
 
   def new
     @wiki = Wiki.find(params[:wiki_id])
-    @page = @wiki.pages.new
+    @page = @wiki.pages.new(name: params[:name])
   end
 
   def create

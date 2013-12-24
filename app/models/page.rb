@@ -13,13 +13,17 @@ class Page < ActiveRecord::Base
       first
   end
 
-  def html_content
-    Kramdown::Document.new(referenced_content).to_html
+  def html_content(context)
+    Kramdown::Document.new(referenced_content(context)).to_html
   end
 
-  def referenced_content
+  def referenced_content(context)
     content.gsub(/(([A-Z][a-z0-9]+){2,})/) { |page_name|
-      "[#{page_name}](/#{wiki.name}/#{page_name})"
+      if wiki.page?(page_name)
+        "[#{page_name}](#{context.named_page_path(wiki.name,page_name)})"
+      else
+        "#{page_name}[?](#{context.new_wiki_page_path(wiki, name: page_name)})"
+      end
     }
   end
 end

@@ -53,4 +53,13 @@ describe Wiki do
     end
   end
 
+  describe "#page?" do
+    Given {
+      wiki.save
+      wiki.pages.create(Attrs.page)
+    }
+    Then { wiki.page?(Attrs.page[:name]) }
+    Then { ! wiki.page?("AnotherName") }
+  end
+
 end
