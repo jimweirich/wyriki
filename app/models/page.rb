@@ -22,7 +22,7 @@ class Page < ActiveRecord::Base
       if wiki.page?(page_name)
         "[#{page_name}](#{context.named_page_path(wiki.name,page_name)})"
       else
-        "#{page_name}[?](#{context.new_wiki_page_path(wiki, name: page_name)})"
+        "#{page_name}[?](#{context.new_named_page_path(wiki.name, page_name)})"
       end
     }
   end
