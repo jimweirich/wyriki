@@ -34,9 +34,12 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :testing do
+group :development do
   gem 'rspec-rails'
   gem 'rspec-given', '= 3.3.0.beta2'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'launchy'
 end
 
 # Use ActiveModel has_secure_password
