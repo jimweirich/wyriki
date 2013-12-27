@@ -2,7 +2,39 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-$banner_bg: darken(#edfbff, 5%);
+$color1: #31709d;
+$color2: #3c8cc4;
+$color3: #62a3d1;
+$color4: #b3b3b3;
+$color5: #cdcdcd;
+
+$color6: #f0f0f0;
+
+$main_bg: color6;
+$main_fg: color1;
+
+$banner_bg: $color3;
+$banner_fg: $color5;
+
+$button_bg: $color1;
+$button_fg: $color6;
+
+$anchor_fg: $color2;
+$alt_anchor_fg: lighten($color5, 20%);
+
+body {
+    background: $main_bg;
+    color: $main_fg;
+}
+
+a {
+  color: $color2;
+}
+
+.button {
+    background: $button_bg;
+    color: $button_fg;
+}
 
 .actions {
     float: right;
@@ -13,11 +45,26 @@ $banner_bg: darken(#edfbff, 5%);
 
 .header {
     background: $banner_bg;
+    color: $banner_fg;
+
+    a {
+        color: $alt_anchor_fg;
+    }
+    a:hover {
+        color: darken($alt_anchor_fg, 5%);
+    }
 }
 
 .sidebar {
     padding: 0.5em 1em;
     background: $banner_bg;
+    color: $banner_fg;
+    a {
+        color: $alt_anchor_fg;
+    }
+    a:hover {
+        color: darken($alt_anchor_fg, 5%);
+    }
 }
 
 .flash {
