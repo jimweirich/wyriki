@@ -4,7 +4,7 @@
   </div>
   <div class="large-4 columns">
     <p class="actions">
-      <% if current_user %>
+      <% if current_user.logged_in? %>
       <%= current_user.name %>
       (<%= link_to "sign out", session_path, method: :delete %>)
       <% else %>

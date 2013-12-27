@@ -45,6 +45,12 @@ Given(/^a base wiki$/) do
   reader.permissions.create!(wiki: wiki, role: "reader")
 end
 
+Given(/^noone is logged in$/) do
+  page = app.root_page
+  page.visit
+  page.signout
+end
+
 Given(/^I am a reader$/) do
   login_page = app.login_page
   login_page.login("reader@reader", "secret")

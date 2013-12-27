@@ -19,4 +19,12 @@ class RootPage < PageObject
       page.should have_content(wiki_name)
     end
   end
+
+  def signout
+    within("div.header p.actions") do
+      click_link ("sign out")
+    end
+  rescue Capybara::ElementNotFound
+    # Not currently logged in
+  end
 end
