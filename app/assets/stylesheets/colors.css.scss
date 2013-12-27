@@ -1,0 +1,15 @@
+// Color assignments
+
+@import "colorscheme";
+
+$main_bg: color6;
+$main_fg: color1;
+
+$banner_bg: $color3;
+$banner_fg: $color5;
+
+$button_bg: $color1;
+$button_fg: $color6;
+
+$anchor_fg: $color2;
+$alt_anchor_fg: lighten($color5, 20%);
