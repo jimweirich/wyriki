@@ -35,7 +35,11 @@ describe Page do
   end
 
   describe "#html_content" do
-    Given(:context) { double(new_wiki_page_path: "MISSING", named_page_path: "EXISTING") }
+    Given(:writer) { true }
+    Given(:user) { double(:can_write? => writer) }
+    Given(:context) {
+      double(new_named_page_path: "MISSING", named_page_path: "EXISTING", current_user: user)
+    }
 
     describe "basic styling" do
       Given(:content) { "Hello, World\n" }
@@ -54,8 +58,17 @@ describe Page do
       Given { wiki.stub(:page? => false) }
       Given { page.stub(:wiki => wiki) }
       Given(:content) { "This is a HomePage." }
-      Then { page.html_content(context) =~ /<a[^>]+>\?<\/a>/ }
-      Then { page.html_content(context) =~ /href="MISSING"/ }
+
+      context "with writer" do
+        Given(:writer) { true }
+        Then { page.html_content(context) =~ /<a[^>]+>\?<\/a>/ }
+        Then { page.html_content(context) =~ /href="MISSING"/ }
+      end
+
+      context "with reader" do
+        Given(:writer) { false }
+        Then { page.html_content(context) !~ /<a[^>]+>\?<\/a>/ }
+      end
     end
   end
 end
