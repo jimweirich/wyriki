@@ -1,8 +1,8 @@
 <div class="row separate">
-  <div class="columns large-8">
+  <div class="columns small-8">
     <h2>User <%= @user.name %></h2>
   </div>
-  <div class="columns medium-4">
+  <div class="columns small-4">
     <p class="actions">
       <%= link_to "Edit", edit_user_path(@user), button_css %>
       <%= link_to "Delete", @user,
@@ -15,7 +15,7 @@
 </div>
 
 <div class="row">
-  <div class="columns large-12">
+  <div class="columns small-12">
     <div class="row">
       <div class="columns small-1">
         Name:
@@ -37,26 +37,26 @@
 
 
 <div class="row separate">
-  <div class="columns large-8">
+  <div class="columns small-8">
     <h2>Wiki Permissions</h2>
   </div>
 </div>
 
 <% @wikis.each do |wiki| %>
 <div class="row">
-  <div class="columns large-2">
+  <div class="columns small-2">
     <%= wiki.name %>
   </div>
   <%= form_for(@user.permission_for(wiki)) do |f| %>
-  <div class="columns large-2">
+  <div class="columns small-2">
     <%= f.select :role, ["reader", "writer", "admin"] %>
     <%= f.hidden_field :wiki_id %>
     <%= f.hidden_field :user_id %>
   </div>
-  <div class="columns large-1">
+  <div class="columns small-1">
     <%= f.submit "Update"%>
   </div>
-  <div class="columns large-1">
+  <div class="columns small-1">
   </div>
   <% end %>
 </div>

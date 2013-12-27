@@ -1,8 +1,8 @@
 <div class="row separate">
-  <div class="columns large-6">
+  <div class="columns small-6">
     <h1>Wiki: <%= @wiki.name %></h1>
   </div>
-  <div class="columns large-6">
+  <div class="columns small-6">
     <p class="actions">
       <%= link_to "Edit", edit_wiki_path(@wiki), button_css %>
       <%= link_to "Delete", wiki_path(@wiki),
@@ -17,10 +17,10 @@
 <p>Home Page: <%= @wiki.home_page %></p>
 
 <div class="row">
-  <div class="columns large-8">
+  <div class="columns small-8">
     <h2>Pages</h2>
   </div>
-  <div class="columns medium-4">
+  <div class="columns small-4">
     <p class="actions">
       <%= link_to "Create page", new_wiki_page_path(@wiki), button_css %>
     </p>

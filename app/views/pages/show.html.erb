@@ -1,5 +1,5 @@
 <div class="row separate">
-  <div class="large-6 columns">
+  <div class="small-6 columns">
     <h1><%= link_to @page.wiki.name, @page.wiki %> / <%= @page.name %></h1>
   </div>
   <div class="small-4 columns">
@@ -15,7 +15,7 @@
 </div>
 
 <div class="row">
-  <div class="large-12 columns" id="page-content">
+  <div class="small-12 columns" id="page-content">
     <%= @page.html_content(self).html_safe %>
   </div>
 </div>

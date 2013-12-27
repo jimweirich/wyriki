@@ -1,8 +1,8 @@
 <div class="row separate">
-  <div class="columns large-8">
+  <div class="columns small-8">
     <h1>Wikis</h1>
   </div>
-  <div class="columns medium-4">
+  <div class="columns small-4">
     <p class="actions">
       <%= link_to "Create new wiki", new_wiki_path, button_css %>
     </p>
@@ -10,7 +10,7 @@
 </div>
 
 <div class="row" id="wikilist">
-  <div class="columns large-8">
+  <div class="columns small-8">
     <ul>
       <% @wikis.each do |wiki| %>
       <li><%= link_to wiki.name, wiki %></li>
