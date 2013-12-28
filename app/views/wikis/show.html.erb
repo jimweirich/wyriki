@@ -14,7 +14,10 @@
   </div>
 </div>
 
-<p>Home Page: <%= @wiki.home_page %></p>
+<p>
+  Home Page:
+  <%= link_to @wiki.home_page, named_page_path(@wiki.name, @wiki.home_page) %>
+</p>
 
 <div class="row">
   <div class="columns small-8">
