@@ -24,8 +24,16 @@ module AppContext
       LoginPage.new(self, context)
     end
 
-    def content_page(wiki_name, page_name)
+    def main_page(wiki_name)
+      MainPage.new(self, context, wiki_name)
+    end
+
+    def content_page(wiki_name="", page_name="")
       ContentPage.new(self, context, wiki_name, page_name)
+    end
+
+    def new_page_form(wiki_name)
+      NewPageForm.new(self, context, wiki_name)
     end
   end
 end

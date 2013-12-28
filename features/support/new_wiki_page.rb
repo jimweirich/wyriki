@@ -9,7 +9,7 @@ class NewWikiPage < PageObject
     fill_in("wiki_home_page", with: home_page)
   end
 
-  def create_wiki
+  def submit
     click_button("Create Wiki")
   end
 end

@@ -12,7 +12,7 @@ Given(/^I create a new wiki named "(.*?)" with "(.*?)"$/) do |wiki_name, home_pa
   page = app.new_wiki_page
   page.name = wiki_name
   page.home_page = home_page
-  page.create_wiki
+  page.submit
 end
 
 Given(/^I click "(.*?)"$/) do |link|
@@ -81,4 +81,22 @@ Then(/^there is no option to create a new page$/) do
   within("div#page-content") do
     page.should_not have_content("?")
   end
+end
+
+Given(/^I am on the main page of "(.*?)"$/) do |wiki_name|
+  page = app.main_page(wiki_name)
+  page.visit
+end
+
+When(/^I create a new page$/) do
+  app.current_page.click_create_page
+  form = app.new_page_form("Base")
+  form.name = "AnotherNewPage"
+  form.content = "More Content"
+  form.submit
+end
+
+Then(/^I can see the new page$/) do
+  page = app.content_page
+  page.must_have_title("AnotherNewPage")
 end

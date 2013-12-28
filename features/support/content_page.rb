@@ -11,4 +11,11 @@ class ContentPage < PageObject
     context.visit "/#{@wiki_name}/#{@page_name}"
     make_current_page
   end
+
+  def must_have_title(title)
+    within("h1#page-title") do
+      page.should have_content(title)
+    end
+  end
+
 end
