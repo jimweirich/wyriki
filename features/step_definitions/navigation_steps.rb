@@ -9,10 +9,10 @@ end
 
 Given(/^I create a new wiki named "(.*?)" with "(.*?)"$/) do |wiki_name, home_page|
   app.root_page.create_new_wiki
-  page = app.new_wiki_page
-  page.name = wiki_name
-  page.home_page = home_page
-  page.submit
+  form = app.new_wiki_form
+  form.name = wiki_name
+  form.home_page = home_page
+  form.submit
 end
 
 Given(/^I click "(.*?)"$/) do |link|

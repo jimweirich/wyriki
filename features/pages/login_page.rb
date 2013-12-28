@@ -1,4 +1,4 @@
-require './features/support/page_object'
+require './features/pages/page_object'
 
 class LoginPage < PageObject
   def visit

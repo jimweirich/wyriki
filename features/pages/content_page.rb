@@ -1,4 +1,4 @@
-require './features/support/page_object'
+require './features/pages/page_object'
 
 class ContentPage < PageObject
   def initialize(app, context, wiki_name, page_name)
@@ -8,6 +8,7 @@ class ContentPage < PageObject
   end
 
   def visit
+    fail "Need Wiki and Page names if using visit" if @wiki_name.nil? || @page_name.nil?
     context.visit "/#{@wiki_name}/#{@page_name}"
     make_current_page
   end

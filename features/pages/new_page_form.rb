@@ -1,4 +1,4 @@
-require './features/support/page_object'
+require './features/pages/page_object'
 
 class NewPageForm < PageObject
   def initialize(app, context, wiki_name)

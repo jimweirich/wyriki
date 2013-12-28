@@ -16,8 +16,8 @@ module AppContext
       RootPage.new(self, context)
     end
 
-    def new_wiki_page
-      NewWikiPage.new(self, context)
+    def new_wiki_form
+      NewWikiForm.new(self, context)
     end
 
     def login_page
@@ -28,7 +28,7 @@ module AppContext
       MainPage.new(self, context, wiki_name)
     end
 
-    def content_page(wiki_name="", page_name="")
+    def content_page(wiki_name=nil, page_name=nil)
       ContentPage.new(self, context, wiki_name, page_name)
     end
 

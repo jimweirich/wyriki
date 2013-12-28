@@ -1,6 +1,6 @@
-require './features/support/page_object'
+require './features/pages/page_object'
 
-class NewWikiPage < PageObject
+class NewWikiForm < PageObject
   def name=(wiki_name)
     fill_in("wiki_name", with: wiki_name)
   end
