@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def run(klass, *args)
+    klass.new(self).run(*args)
+  end
+
   def current_user
     @current_user ||= begin
                         if session[:user_id]

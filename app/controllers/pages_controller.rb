@@ -6,14 +6,15 @@ class PagesController < ApplicationController
   end
 
   def show_named
-    @wiki = Wiki.find_by_name(named_params[:wiki])
-    @page = Page.by_name(named_params[:wiki], named_params[:page])
-    if @page
-      render :show
-    else
-      wiki = Wiki.find_by_name(named_params[:wiki])
-      redirect_to new_named_page_path(wiki.name, named_params[:page])
-    end
+    run(ShowNamed, named_params[:wiki], named_params[:page],
+      success: ->(wiki, page) {
+        @wiki = wiki
+        @page = page
+        render :show
+      },
+      page_not_found: ->(wiki) {
+        redirect_to new_named_page_path(wiki.name, named_params[:page])
+      })
   end
 
   def new_named
