@@ -1,6 +1,11 @@
 <div class="row header">
   <div class="small-8 columns">
-    <h1><%= link_to "WyRiki", wikis_path %></h1>
+    <h1>
+      <%= link_to "WyRiki", wikis_path %>
+      <% if @wiki %>
+      / <%= link_to @wiki.name, @wiki %>
+      <% end %>
+    </h1>
   </div>
   <div class="small-4 columns">
     <p class="actions">

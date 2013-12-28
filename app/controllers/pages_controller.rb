@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   end
 
   def show_named
+    @wiki = Wiki.find_by_name(named_params[:wiki])
     @page = Page.by_name(named_params[:wiki], named_params[:page])
     if @page
       render :show
