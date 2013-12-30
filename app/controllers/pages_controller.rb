@@ -2,14 +2,7 @@ class PagesController < ApplicationController
   include PageRunners
 
   def show
-    wiki_id = params[:wiki_id]
-    page_id = params[:id]
-    run(Show, wiki_id, page_id) do |on|
-      on.success { |wiki, page|
-        @wiki = wiki
-        @page = page
-      }
-    end
+    @wiki, @page = run(Show, params[:wiki_id], params[:id])
   end
 
   def show_named
@@ -26,22 +19,12 @@ class PagesController < ApplicationController
   end
 
   def new_named
-    run(NewNamed, named_params[:wiki], named_params[:page]) do |on|
-      on.success { |wiki, page|
-        @wiki = wiki
-        @page = page
-        render :new
-      }
-    end
+    @wiki, @page = run(NewNamed, named_params[:wiki], named_params[:page])
+    render :new
   end
 
   def new
-    run(New, params[:wiki_id], params[:name]) do |on|
-      on.success { |wiki, page|
-        @wiki = wiki
-        @page = page
-      }
-    end
+    @wiki, @page = run(New, params[:wiki_id], params[:name])
   end
 
   def create
@@ -56,20 +39,11 @@ class PagesController < ApplicationController
   end
 
   def edit
-    wiki_id = params[:wiki_id]
-    page_id = params[:id]
-    run(Edit, wiki_id, page_id) do |on|
-      on.success { |wiki, page|
-        @wiki = wiki
-        @page = page
-      }
-    end
+    @wiki, @page = run(Edit, params[:wiki_id], params[:id])
   end
 
   def update
-    run(Update,
-        params[:wiki_id], params[:id], content_params
-      ) do |on|
+    run(Update, params[:wiki_id], params[:id], content_params ) do |on|
       on.success { |wiki, page|
         redirect_to [wiki, page], notice: "#{page.name} updated"
       }
@@ -82,11 +56,8 @@ class PagesController < ApplicationController
   end
 
   def destroy
-    run(Destroy, params[:wiki_id], params[:id]) do |on|
-      on.success { |wiki|
-        redirect_to wiki
-      }
-    end
+    wiki = run(Destroy, params[:wiki_id], params[:id]).first
+    redirect_to wiki
   end
 
   private
