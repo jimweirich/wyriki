@@ -1,43 +1,53 @@
 class WikisController < ApplicationController
+  include WikiRunners
 
   def index
-    @wikis = Wiki.active_wikis
+    run(Index) do |on|
+      on.success { |wikis|
+        @wikis = wikis
+      }
+    end
   end
 
   def show
-    @wiki = Wiki.find(params[:id])
+    @wiki = run(Show, params[:id]).first
   end
 
   def new
-    @wiki = Wiki.new
+    @wiki = run(New).first
   end
 
   def create
-    @wiki = Wiki.new(wiki_params)
-    if @wiki.save
-      redirect_to wikis_path, notice: "Wiki #{@wiki.name} created"
-    else
-      render :new
+    run(Create, wiki_params) do |on|
+      on.success { |wiki|
+        redirect_to wikis_path, notice: "Wiki #{wiki.name} created"
+      }
+      on.failure { |wiki|
+        @wiki = wiki
+        render :new
+      }
     end
   end
 
   def edit
-    @wiki = Wiki.find(params[:id])
+    @wiki = run(Edit, params[:id])
   end
 
   def update
-    @wiki = Wiki.find(params[:id])
-    if @wiki.update_attributes(wiki_params)
-      redirect_to wikis_path, notice: "Wiki #{@wiki.name} updated"
-    else
-      render :edit
+    run(Update, params[:id]) do |on|
+      on.success { |wiki|
+        redirect_to wikis_path, notice: "Wiki #{wiki.name} updated"
+      }
+      on.failure { |wiki|
+        @wiki = wiki
+        render :edit
+      }
     end
   end
 
   def destroy
-    @wiki = Wiki.find(params[:id])
-    @wiki.destroy
-    redirect_to wikis_path, notice: "Wiki #{@wiki.name} deleted"
+    wiki_name = run(Destroy, params[:id]).first
+    redirect_to wikis_path, notice: "Wiki #{wiki_name} deleted"
   end
 
   private

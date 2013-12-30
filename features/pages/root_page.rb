@@ -1,3 +1,5 @@
+require './features/pages/page_object'
+
 class RootPage < PageObject
   def visit
     context.visit "/"
@@ -14,9 +16,13 @@ class RootPage < PageObject
     end
   end
 
-  def has_wiki_in_list(wiki_name)
+  def has_wiki_in_list(wiki_name, have: true)
     within("div#wikilist ul > li") do
-      page.should have_content(wiki_name)
+      if have
+        page.should have_content(wiki_name)
+      else
+        page.should_not have_content(wiki_name)
+      end
     end
   end
 

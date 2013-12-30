@@ -23,5 +23,6 @@ class Runner
 
   def callback(name, *args)
     @callbacks.call(name, *args)
+    args
   end
 end

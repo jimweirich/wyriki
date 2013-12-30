@@ -35,6 +35,9 @@ Then(/^page should have "(.*?)" in the list of wikis$/) do |wiki_name|
   app.root_page.has_wiki_in_list(wiki_name)
 end
 
+Then(/^page should not have "(.*?)" in the list of wikis$/) do |wiki_name|
+  app.root_page.has_wiki_in_list(wiki_name, have: false)
+end
 
 Given(/^a base wiki$/) do
   wiki = Wiki.create!(Attrs.wiki(name: "Base"))
@@ -99,4 +102,10 @@ end
 Then(/^I can see the new page$/) do
   page = app.content_page
   page.must_have_title("AnotherNewPage")
+end
+
+When(/^I delete a wiki named "(.*?)"$/) do |wiki_name|
+  click_link(wiki_name)
+  main_page = app.main_page(wiki_name)
+  main_page.click_delete_wiki
 end
