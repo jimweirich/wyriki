@@ -1,42 +1,48 @@
 class UsersController < ApplicationController
+  include UserRunners
+
   def index
-    @users = User.all_users
+    @users = run(Index).first
   end
 
   def show
-    @user = User.find(params[:id])
-    @wikis = Wiki.active_wikis
+    @user, @wikis = run(Show, params[:id])
   end
 
   def new
-    @user = User.new
+    @user = run(New).first
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to users_path, notice: "Added user #{@user.name}"
-    else
-      render :new
+    run(Create, user_params) do |on|
+      on.success { |user|
+        redirect_to users_path, notice: "Added user #{user.name}"
+      }
+      on.failure { |user|
+        @user = user
+        render :new
+      }
     end
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = run(Edit, params[:id]).first
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_edit_params)
-      redirect_to @user, notice: "Updated user #{@user.name}"
-    else
-      render :new
+    run(Update, params[:id], user_edit_params) do |on|
+      on.success { |user|
+        redirect_to user, notice: "Updated user #{user.name}"
+      }
+      on.failure { |user|
+        @user = user
+        render :new
+      }
     end
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    run(Destroy, params[:id])
     redirect_to users_path
   end
 

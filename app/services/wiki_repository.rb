@@ -1,6 +1,32 @@
 
 class WikiRepository
 
+  # User Methods
+
+  def all_users
+    User.all_users
+  end
+
+  def new_user(attrs={})
+    User.new(attrs)
+  end
+
+  def find_user(user_id)
+    User.find(user_id)
+  end
+
+  def save_user(user)
+    user.save
+  end
+
+  def update_user(user, attrs)
+    user.update_attributes(attrs)
+  end
+
+  def destroy_user(user_id)
+    User.destroy(user_id)
+  end
+
   # Wiki Methods
 
   def active_wikis
