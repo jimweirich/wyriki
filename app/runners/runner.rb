@@ -3,12 +3,9 @@ class Runner
   attr_reader :context
 
   def initialize(context)
+    @callbacks = NamedCallbacks.new
     @context = context
-  end
-
-  def run(*args, callbacks)
-    @callbacks = callbacks
-    do_run(*args)
+    yield(@callbacks) if block_given?
   end
 
   def success(*args)
@@ -20,11 +17,6 @@ class Runner
   end
 
   def callback(name, *args)
-    cb = @callbacks[name]
-    if cb
-      cb.(*args)
-    else
-      true
-    end
+    @callbacks.call(name, *args)
   end
 end

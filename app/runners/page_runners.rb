@@ -1,6 +1,6 @@
 module PageRunners
   class Show < Runner
-    def do_run(wiki_id, page_id)
+    def run(wiki_id, page_id)
       wiki = Wiki.find(wiki_id)
       page = wiki.pages.find(page_id)
       success(wiki, page)
@@ -8,7 +8,7 @@ module PageRunners
   end
 
   class ShowNamed < Runner
-    def do_run(wiki_name, page_name)
+    def run(wiki_name, page_name)
       wiki = Wiki.find_by_name(wiki_name)
       page = Page.by_name(wiki_name, page_name)
       if page
@@ -20,7 +20,7 @@ module PageRunners
   end
 
   class NewNamed < Runner
-    def do_run(wiki_name, page_name)
+    def run(wiki_name, page_name)
       wiki = Wiki.find_by_name(wiki_name)
       page = wiki.pages.new(name: page_name)
       success(wiki, page)
@@ -28,7 +28,7 @@ module PageRunners
   end
 
   class New < Runner
-    def do_run(wiki_id, page_name)
+    def run(wiki_id, page_name)
       wiki = Wiki.find(wiki_id)
       page = wiki.pages.new(name: page_name)
       success(wiki, page)
@@ -36,7 +36,7 @@ module PageRunners
   end
 
   class Create < Runner
-    def do_run(wiki_id, page_params)
+    def run(wiki_id, page_params)
       wiki = Wiki.find(wiki_id)
       page = wiki.pages.new(page_params)
       if page.save
@@ -48,7 +48,7 @@ module PageRunners
   end
 
   class Edit < Runner
-    def do_run(wiki_id, page_id)
+    def run(wiki_id, page_id)
       wiki = Wiki.find(wiki_id)
       page = wiki.pages.find(page_id)
       success(wiki, page)
@@ -56,7 +56,7 @@ module PageRunners
   end
 
   class Update
-    def do_run(wiki_id, page_id)
+    def run(wiki_id, page_id)
       @wiki = Wiki.find(wiki_id)
       @page = @wiki.pages.find(page_id)
       if @page.update_attributes(content_params)
@@ -68,7 +68,7 @@ module PageRunners
   end
 
   class Destroy
-    def do_run(wiki_id, page_id)
+    def run(wiki_id, page_id)
       wiki = Wiki.find(wiki_id)
       page = wiki.pages.find(page_id)
       page.destroy
