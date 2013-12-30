@@ -1,5 +1,5 @@
-require 'rspec/given'
-require './app/runners/named_callbacks'
+require 'fast_helper'
+require 'app/runners/named_callbacks'
 
 describe NamedCallbacks do
   Given(:nc) { NamedCallbacks.new }

@@ -1,3 +1,4 @@
+require_dependency './app/runners/named_callbacks'
 
 class Runner
   attr_reader :context
