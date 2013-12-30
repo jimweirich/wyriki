@@ -18,8 +18,8 @@ class PagesController < ApplicationController
         @page = page
         render :show
       }
-      on.page_not_found { |wiki|
-        redirect_to new_named_page_path(wiki.name, named_params[:page])
+      on.page_not_found { |wiki_name|
+        redirect_to new_named_page_path(wiki_name, named_params[:page])
       }
     end
   end
@@ -66,11 +66,15 @@ class PagesController < ApplicationController
   end
 
   def update
-    run(PageRunners::Update, params[:wiki_id], params[:id]) do |on|
+    run(PageRunners::Update,
+        params[:wiki_id], params[:id], content_params
+      ) do |on|
       on.success { |wiki, page|
-        redirect_to [@wiki, @page], notice: "#{@page.name} updated"
+        redirect_to [wiki, page], notice: "#{page.name} updated"
       }
       on.failure { |wiki, page|
+        @wiki = wiki
+        @page = page
         render :new
       }
     end
