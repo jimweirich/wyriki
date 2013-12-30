@@ -8,11 +8,19 @@ class FauxCallback
     @invoked_args
   end
 
-  def configuration(&block)
+  def configure(*names)
     lambda do |on|
-      on.success { |*args| invoke(:success, *args) }
-      on.failure { |*args| invoke(:failure, *args) }
-      block.call(on) if block_given?
+      configure_name(on, :success)
+      configure_name(on, :failure)
+      names.each do |name|
+        configure_name(on, name)
+      end
     end
+  end
+
+  private
+
+  def configure_name(on, name)
+    on.send(name) { |*args| invoke(name, *args) }
   end
 end
