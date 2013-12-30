@@ -1,12 +1,17 @@
 class PagesController < ApplicationController
 
   def show
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = @wiki.pages.find(params[:id])
+    wiki_id = params[:wiki_id]
+    page_id = params[:id]
+    run(PageRunners::Show, wiki_id, page_id,
+      success: ->(wiki, page) {
+        @wiki = wiki
+        @page = page
+      })
   end
 
   def show_named
-    run(ShowNamed, named_params[:wiki], named_params[:page],
+    run(PageRunners::ShowNamed, named_params[:wiki], named_params[:page],
       success: ->(wiki, page) {
         @wiki = wiki
         @page = page
@@ -18,46 +23,59 @@ class PagesController < ApplicationController
   end
 
   def new_named
-    @wiki = Wiki.find_by_name(named_params[:wiki])
-    @page = @wiki.pages.new(name: named_params[:page])
-    render :new
+    run(PageRunners::NewNamed, named_params[:wiki], named_params[:page],
+      success: ->(wiki, page) {
+        @wiki = wiki
+        @page = page
+        render :new
+      })
   end
 
   def new
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = @wiki.pages.new(name: params[:name])
+    run(PageRunners::New, params[:wiki_id], params[:name],
+      success: ->(wiki, page) {
+        @wiki = wiki
+        @page = page
+      })
   end
 
   def create
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = @wiki.pages.new(page_params)
-    if @page.save
-      redirect_to [@wiki, @page], notice: "#{@page.name} created"
-    else
-      render :new
-    end
+    run(PageRunners::Create,
+      params[:wiki_id],
+      page_params,
+      success: ->(page) {
+        redirect_to [page.wiki, page], notice: "#{page.name} created"
+      },
+      failure: ->(wiki, page) {
+        render :new
+      })
   end
 
   def edit
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = @wiki.pages.find(params[:id])
+    wiki_id = params[:wiki_id]
+    page_id = params[:id]
+    run(PageRunners::Edit, wiki_id, page_id,
+      success: ->(wiki, page) {
+        @wiki = wiki
+        @page = page
+      })
   end
 
   def update
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = @wiki.pages.find(params[:id])
-    if @page.update_attributes(content_params)
-      redirect_to [@wiki, @page], notice: "#{@page.name} updated"
-    else
-      render :new
-    end
+    run(PageRunners::Update, params[:wiki_id], params[:id],
+      success: ->(wiki, page) {
+        redirect_to [@wiki, @page], notice: "#{@page.name} updated"
+      },
+      failure: ->(wiki, page) {
+        render :new
+      })
   end
 
   def destroy
-    @wiki = Wiki.find(params[:wiki_id])
-    @page = @wiki.pages.find(params[:id])
-    @page.destroy
-    redirect_to @wiki
+    run(PageRunners::Destroy, params[:wiki_id], params[:id],
+      success: ->(wiki) {
+        redirect_to wiki
+      })
   end
 
   private
