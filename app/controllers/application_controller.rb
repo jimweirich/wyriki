@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
     klass.new(self, &block).run(*args)
   end
 
+  def repo
+    @repo = WikiRepository.new
+  end
+
   def current_user
     @current_user ||= begin
                         if session[:user_id]

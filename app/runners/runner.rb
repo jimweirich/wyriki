@@ -9,6 +9,10 @@ class Runner
     yield(@callbacks) if block_given?
   end
 
+  def repo
+    context.repo
+  end
+
   def success(*args)
     callback(:success, *args)
   end

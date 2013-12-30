@@ -3,14 +3,14 @@ require 'app/runners/page_runners'
 
 module PageRunners
   describe PageRunners do
-    Given(:context) { double }
+    Given(:context) { double(repo: repo) }
     Given(:wiki) { double(id: 123, name: "Base") }
     Given(:page) { double(id: 124, wiki: wiki, name: "HomePage") }
     Given(:callback) { FauxCallback.new }
     Given(:cb_config) { callback.configure(:page_not_found) }
 
     Given(:runner) {
-      runner_under_test.new(context, &cb_config).with_repo(repo)
+      runner_under_test.new(context, &cb_config)
     }
 
     describe Show do
@@ -44,26 +44,26 @@ module PageRunners
     describe NewNamed do
       Given(:runner_under_test) { NewNamed }
       Given(:repo) {
-        double(find_named_wiki: wiki, new_page_on_wiki: page)
+        double(find_named_wiki: wiki, new_page_on: page)
       }
 
       When { runner.run(wiki.name, page.name) }
 
       Then { repo.should have_received(:find_named_wiki).with(wiki.name) }
-      Then { repo.should have_received(:new_page_on_wiki).with(wiki, name: page.name) }
+      Then { repo.should have_received(:new_page_on).with(wiki, name: page.name) }
       Then { callback.invoked == [:success, wiki, page] }
     end
 
     describe New do
       Given(:runner_under_test) { New }
       Given(:repo) {
-        double(find_wiki: wiki, new_page_on_wiki: page)
+        double(find_wiki: wiki, new_page_on: page)
       }
 
       When { runner.run(wiki.id, page.name) }
 
       Then { repo.should have_received(:find_wiki).with(wiki.id) }
-      Then { repo.should have_received(:new_page_on_wiki).with(wiki, name: page.name) }
+      Then { repo.should have_received(:new_page_on).with(wiki, name: page.name) }
       Then { callback.invoked == [:success, wiki, page] }
     end
 
@@ -71,13 +71,13 @@ module PageRunners
       Given(:page_attrs) { { name: "HomePage" } }
       Given(:runner_under_test) { Create }
       Given(:repo) {
-        double(find_wiki: wiki, new_page_on_wiki: page)
+        double(find_wiki: wiki, new_page_on: page)
       }
 
       When { runner.run(wiki.id, page_attrs) }
 
       Invariant { repo.should have_received(:find_wiki).with(wiki.id) }
-      Invariant { repo.should have_received(:new_page_on_wiki).with(wiki, page_attrs) }
+      Invariant { repo.should have_received(:new_page_on).with(wiki, page_attrs) }
       Invariant { repo.should have_received(:save_page).with(page) }
 
       context "with no errors" do
