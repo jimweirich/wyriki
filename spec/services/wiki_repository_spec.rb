@@ -207,4 +207,47 @@ describe WikiRepository do
       Then { result.should_not have_failed }
     end
   end
+
+  describe "#new_permission" do
+    Given!(:user) { User.create!(Attrs.user) }
+    Given!(:wiki) { Wiki.create!(Attrs.wiki) }
+    Given!(:role) { "writer" }
+
+    When(:new_perm) { repo.new_permission(wiki, user, role)}
+
+    Then { new_perm.new_record? }
+    Then { new_perm.user == user }
+    Then { new_perm.wiki == wiki }
+    Then { new_perm.role == role }
+  end
+
+  describe "#save_permission" do
+    Given!(:user) { User.create!(Attrs.user) }
+    Given!(:wiki) { Wiki.create!(Attrs.wiki) }
+    Given!(:role) { "writer" }
+    Given(:new_perm) { Permission.new(user: user, wiki: wiki, role: role) }
+
+    When(:saved) { repo.save_permission(new_perm) }
+
+    Then { saved == true }
+  end
+
+  describe "#find_permission_for" do
+    Given!(:user) { User.create!(Attrs.user) }
+    Given!(:wiki) { Wiki.create!(Attrs.wiki) }
+    Given!(:perm) { Permission.create(Attrs.permission(user: user, wiki: wiki)) }
+
+    Then { repo.find_permission_for(wiki, user) == perm }
+  end
+
+  describe "#find_permission_for" do
+    Given!(:user) { User.create!(Attrs.user) }
+    Given!(:wiki) { Wiki.create!(Attrs.wiki) }
+    Given!(:perm) { Permission.create(Attrs.permission(user: user, wiki: wiki)) }
+
+    When(:saved) { repo.update_permission(perm, role: "admin") }
+
+    Then { saved == true }
+    Then { repo.find_permission_for(wiki, user).role == "admin" }
+  end
 end

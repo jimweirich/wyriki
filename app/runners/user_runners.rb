@@ -14,7 +14,7 @@ module UserRunners
     end
   end
 
-  class New < Runner
+   class New < Runner
     def run
       success(repo.new_user)
     end

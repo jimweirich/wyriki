@@ -84,4 +84,23 @@ class WikiRepository
     page = wiki.pages.find(page_id)
     page.destroy
   end
+
+  # Permission methods
+
+  def new_permission(wiki, user, role)
+    user.permissions.new(wiki: wiki, role: role)
+  end
+
+  def save_permission(perm)
+    perm.save
+  end
+
+  def find_permission_for(wiki, user)
+    user.permission_for(wiki)
+  end
+
+  def update_permission(perm, attrs)
+    perm.update_attributes(attrs)
+  end
+
 end
