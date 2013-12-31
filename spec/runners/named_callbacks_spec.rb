@@ -21,7 +21,7 @@ describe NamedCallbacks do
   describe "with a undeclared callback" do
     Given(:args) { [ ] }
     When(:result) { nc.call(:ok, 1, 2, 3) }
-    Then { result == true }
+    Then { result }
     Then { args == [] }
   end
 end

@@ -37,7 +37,7 @@ describe WikiRepository do
 
     When(:saved) { repo.save_user(new_user) }
 
-    Then { saved == true }
+    Then { saved }
     Then { repo.find_user(new_user.id).email == "x@x" }
 
     context "with bad attributes" do
@@ -54,7 +54,7 @@ describe WikiRepository do
 
     When(:saved) { repo.update_user(user, attrs) }
 
-    Then { saved == true }
+    Then { saved }
     Then { repo.find_user(user.id).name == "NEWNAME" }
 
     context "with bad attributes" do
@@ -141,7 +141,7 @@ describe WikiRepository do
 
     When(:saved) { repo.update_wiki(wiki, attrs) }
 
-    Then { saved == true }
+    Then { saved }
     Then { repo.find_wiki(wiki.id).name == new_name }
 
     context "with bad data" do
@@ -229,7 +229,7 @@ describe WikiRepository do
 
     When(:saved) { repo.save_permission(new_perm) }
 
-    Then { saved == true }
+    Then { saved }
   end
 
   describe "#find_permission_for" do
@@ -247,7 +247,7 @@ describe WikiRepository do
 
     When(:saved) { repo.update_permission(perm, role: "admin") }
 
-    Then { saved == true }
+    Then { saved }
     Then { repo.find_permission_for(wiki, user).role == "admin" }
   end
 end
