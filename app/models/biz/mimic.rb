@@ -1,6 +1,6 @@
 module Biz
 
-  # Include in ActiveRecord models to mimic Biz wrappers.
+  # Include in ActiveRecord models to mimic Biz models.
   module Mimic
     def data
       self

@@ -1,6 +1,6 @@
-require_dependency './app/models/biz/wrapper'
+require_dependency './app/models/biz/model'
 
 module Biz
-  class Permission < Wrapper
+  class Permission < Model
   end
 end

@@ -2,7 +2,7 @@ require 'delegate'
 require_dependency './app/models/biz/block_active_record'
 
 module Biz
-  class Wrapper < SimpleDelegator
+  class Model < SimpleDelegator
     include BlockActiveRecord
 
     def data
