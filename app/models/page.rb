@@ -1,4 +1,6 @@
 class Page < ActiveRecord::Base
+  include Biz::Mimic
+
   belongs_to :wiki
 
   validates :name,

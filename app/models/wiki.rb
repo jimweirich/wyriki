@@ -1,5 +1,5 @@
 class Wiki < ActiveRecord::Base
-  include MimicBiz
+  include Biz::Mimic
 
   has_many :pages, dependent: :destroy
 

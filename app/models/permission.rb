@@ -1,4 +1,6 @@
 class Permission < ActiveRecord::Base
+  include Biz::Mimic
+
   belongs_to :user
   belongs_to :wiki
 

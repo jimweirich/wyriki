@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include Biz::Mimic
 
   has_many :permissions, dependent: :destroy
 
