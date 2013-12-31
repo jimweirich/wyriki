@@ -14,7 +14,11 @@ module Biz
     end
 
     def ==(other)
-      data == other.data
+      if other.respond_to?(:data)
+        data == other.data
+      else
+        data == other
+      end
     end
 
     def biz?

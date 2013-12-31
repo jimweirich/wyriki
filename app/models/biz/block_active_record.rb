@@ -1,5 +1,7 @@
 module Biz
 
+  ActiveRecordNotAvailableError = Class.new(StandardError)
+
   # Include this module to block ActiveRecord save/update_attributes
   # calls on the object.
   module BlockActiveRecord
@@ -30,7 +32,7 @@ module Biz
     private
 
     def no_db_methods
-      fail "No DB methods on Business Objects"
+      fail ActiveRecordNotAvailableError, "No DB methods on Business Objects"
     end
   end
 end
