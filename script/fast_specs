@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby -w
+
+require 'rake'
+
+module Fast
+  module_function
+  def spec?(fn)
+    open(fn) { |f| f.gets =~ /fast_helper/ }
+  end
+end
+
+fast_specs = FileList['spec/**/*_spec.rb'].select { |fn|
+  Fast.spec?(fn)
+}
+
+system "rspec #{fast_specs}"
