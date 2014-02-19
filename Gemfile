@@ -34,7 +34,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :development do
+group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-given', '~> 3.4'
   gem 'cucumber-rails', require: false
