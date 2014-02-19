@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   def repo
     @repo = WikiRepository.new
   end
+  helper_method :repo
 
   def current_user
     @current_user ||= begin

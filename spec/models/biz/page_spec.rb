@@ -10,10 +10,16 @@ describe Biz::Page do
   Given(:page) { Biz::Page.wrap(page_data) }
 
   describe "#html_content" do
+    Given(:found_page) { "PAGE" }
     Given(:writer) { true }
     Given(:user) { double(:can_write? => writer) }
+    Given(:repo) { double(:find_named_page => found_page) }
     Given(:context) {
-      double(new_named_page_path: "MISSING", named_page_path: "EXISTING", current_user: user)
+      double(
+        new_named_page_path: "MISSING",
+        named_page_path: "EXISTING",
+        current_user: user,
+        repo: repo)
     }
 
     describe "basic styling" do
